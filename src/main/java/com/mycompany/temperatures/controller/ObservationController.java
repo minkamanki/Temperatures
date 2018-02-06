@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@RequestMapping("*")
 public class ObservationController {
 
     @Autowired
@@ -33,8 +34,8 @@ public class ObservationController {
         pointService.add("Dubai", 25.092535, 55.1562243);
 
     }
-
-    @RequestMapping(method = RequestMethod.GET)
+    
+    @RequestMapping(method = RequestMethod.GET) 
     public String list(Model model) {
         model.addAttribute("points", pointService.list());
         return "index";
