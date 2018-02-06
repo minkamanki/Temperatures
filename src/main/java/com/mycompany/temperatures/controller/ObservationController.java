@@ -39,11 +39,10 @@ public class ObservationController {
         model.addAttribute("points", pointService.list());
         return "index";
     }
-    
-        @RequestMapping(method = RequestMethod.POST)
+
+    @RequestMapping(method = RequestMethod.POST)
     public String add(@RequestParam double temperature, @RequestParam LocalDate date, @RequestParam LocalTime time, @RequestParam Long pointId) throws IOException { // 
         observationService.add(temperature, date, time, pointId); //
         return "redirect:/articles";
     }
 }
- 

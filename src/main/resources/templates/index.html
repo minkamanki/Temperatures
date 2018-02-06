@@ -3,7 +3,7 @@
     <head>
         <title>Weather observations</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div>
@@ -11,7 +11,19 @@
                 <li th:each="point : ${points}">
                     <a th:href="@{/{pointId}(pointId=${point.id})}" th:text="${point.name}">Point</a>
                 </li>   
-            </ul> 
+            </ul>  
+
+            <!--            <form method="POST" action="/" enctype="multipart/form-data" >
+                            <input type="text" name="temperature" placeholder="Temperature" required/><br>
+                                <label for="meeting">Date : </label>
+                                <input id="meeting" type="date" name="date" value="2018-02-06"/><br>
+                                    <label for="appt-time">Time: </label>
+                                    <input id="appt-time" type="time" name="time" value="00:00"><br>
+                                            <input type="submit" value="Send!"/>
+                                            </form>-->
+
         </div>
     </body>
+
+
 </html>
