@@ -1,9 +1,14 @@
 package com.mycompany.temperatures.service;
 
+import com.mycompany.temperatures.domain.Observation;
+import com.mycompany.temperatures.domain.Point;
 import com.mycompany.temperatures.repository.ObservationRepository;
 import com.mycompany.temperatures.repository.PointRepository;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ObservationService {
@@ -13,5 +18,19 @@ public class ObservationService {
     @Autowired
     private PointRepository pointRepository;
 
+    @Transactional
+    public void add(double temperature, LocalDate date, LocalTime time, Long pointId) {
+        Observation observation = new Observation();
+        observation.setTemperature(temperature);
+        observation.setDate(date);
+        observation.setTime(time);
 
+        Point point = pointRepository.getOne(pointId);
+        observation.setPoint(point);
+
+        point.getObservations().add(observation);
+
+        pointRepository.save(point);
+        observationRepository.save(observation);
+    }
 }
