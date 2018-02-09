@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TeamperturesApplication {
+public class TemperaturesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TeamperturesApplication.class);
+        SpringApplication.run(TemperaturesApplication.class);
     }
 }

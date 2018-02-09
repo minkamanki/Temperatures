@@ -27,5 +27,14 @@ public class PointService {
         List<Point> points = pointRepository.findAll();
         return points;
     }
+
+    public Point findById(Long pointId) {
+        return pointRepository.getOne(pointId);    
+        
+    }
+
+    public boolean isEmpty() {
+        return pointRepository.count() <= 0;
+    }
 }
  
