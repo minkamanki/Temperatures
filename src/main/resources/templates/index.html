@@ -3,38 +3,46 @@
     <head>
         <title>Weather observations</title>
         <meta charset="UTF-8">
-            <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
-        <div>
-            <ul>
-                <li th:each="point : ${points}">
-                    <a th:href="@{/{pointId}(pointId=${point.id})}" th:text="${point.name}">Point</a>
-                </li>   
-            </ul>  
-        </div>        <div th:if="${not #lists.isEmpty(point)}"
-                           <p1><span th:text="${point.name}">Point</span></p1>
-            <ul>
-                <li th:each="observation : ${point.observations}">
-                    <span th:text="${observation.temperature}">Temperature</span>
-                    <span th:text="${observation.date}">Date</span>
-                    <span th:text="${observation.time}">Time</span>
-                </li>   
-            </ul>  
+
+        <div class="container">
+
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="/">Homepage</a></li>
+                <li  class="nav-item" th:each="point :${points}">
+                    <a class="nav-link" th:href="@{/{pointId}(pointId=${point.id})}">
+                        <span th:text="${point.name}">Weather point</span></a>
+                </li>
+            </ul>
+
+            <div th:if="${not #lists.isEmpty(point)}"
+                 <h2><span th:text="${point.name}">Point</span></h2>
+                 <p1>(<span th:text="${point.latitude}">Latitude</span>, <span th:text="${point.longitude}">Longitude</span>)</p1>
+                <ul>
+                    <li th:each="observation : ${point.observations}">
+                        <span th:text="${observation.temperature}">Temperature</span>
+                        <span th:text="${observation.time}">Time</span>
+                    </li>   
+                </ul>  
+            </div>
+            <div>
+                <form method="POST" action="/" enctype="multipart/form-data">
+                    <input type="text" name="temperature" placeholder="Temperature" required/><br/>
+                    <input type="datetime-local" name="time" required/><br/>
+                    <select name="pointId">
+                        <option th:each="point : ${points}"
+                            th:value="${point.id}"
+                            th:utext="${point.name}"/>
+                    </select><br/>
+                    <input type="submit" value="Send!"/>
+                </form>
+            </div>
         </div>
-        <div>
-            <form method="POST" action="/" enctype="multipart/form-data" >
-                <input type="text" name="temperature" placeholder="Temperature" required/><br>
-                <input type="date" name="date" required><br>
-                <input type="time" name="time" required><br>
-                <input type="submit" value="Send!"/>
-            </form>
-
-        </div>
-
-
-
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
-
-
 </html>

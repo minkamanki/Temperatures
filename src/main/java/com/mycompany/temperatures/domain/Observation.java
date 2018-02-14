@@ -1,6 +1,7 @@
 package com.mycompany.temperatures.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -15,8 +16,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Observation extends AbstractPersistable<Long>{
     public double temperature;
-    public LocalDate date;
-    public LocalTime time;
+    public LocalDateTime time;
+//    public LocalTime time;
     @ManyToOne
     public Point point;    
 }
