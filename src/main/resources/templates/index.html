@@ -23,8 +23,8 @@
                  <p1>(<span th:text="${point.latitude}">Latitude</span>, <span th:text="${point.longitude}">Longitude</span>)</p1>
                 <ul>
                     <li th:each="observation : ${point.observations}">
-                        <span th:text="${observation.temperature}">Temperature</span>
                         <span th:text="${observation.time}">Time</span>
+                        <span th:text="${observation.temperature}">Temperature</span><p>°C</p>                        
                     </li>   
                 </ul>  
             </div>
