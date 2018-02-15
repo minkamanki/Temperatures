@@ -24,7 +24,7 @@
                 <ul>
                     <li th:each="observation : ${point.observations}">
                         <span th:text="${observation.time}">Time</span>
-                        <span th:text="${observation.temperature}">Temperature</span><p>°C</p>                        
+                        <p><span th:text="${observation.temperature}">Temperature</span>°C</p>                        
                     </li>   
                 </ul>  
             </div>
