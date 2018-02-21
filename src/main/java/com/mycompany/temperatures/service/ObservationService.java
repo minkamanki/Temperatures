@@ -4,11 +4,11 @@ import com.mycompany.temperatures.domain.Observation;
 import com.mycompany.temperatures.domain.Point;
 import com.mycompany.temperatures.repository.ObservationRepository;
 import com.mycompany.temperatures.repository.PointRepository;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,8 +36,7 @@ public class ObservationService {
     }
 
     public List<Observation> list() {        
-        return observationRepository.findAll();
+        return observationRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, "time")).getContent();
     }
-
 
 }

@@ -36,7 +36,7 @@
                 <ul>
                     <li th:each="observation : ${point.observations}">
                         <p><span th:text="${#temporals.format(observation.time, 'dd-MM-yyyy HH:mm')}">Time</span><br>
-                                <font size="6"><span th:text="${observation.temperature}">Temperature</span>°C</font>
+                            <font size="5"><span th:text="${observation.temperature}">Temperature</span>°C</font>
                         </p>                        
                     </li>   
                 </ul>  
