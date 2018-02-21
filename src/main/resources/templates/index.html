@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Weather observations</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
+        <head>
+            <title>Weather observations</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        </head>
     <body>
 
         <div class="container">
@@ -18,9 +18,9 @@
                 </li>
             </ul>
 
-            <div th:if="${not #lists.isEmpty(point)}"
-                 <h2><span th:text="${point.name}">Point</span></h2>
-                 <p1>(<span th:text="${point.latitude}">Latitude</span>, <span th:text="${point.longitude}">Longitude</span>)</p1>
+            <div th:if="${not #lists.isEmpty(point)}">
+                <h2><span th:text="${point.name}">Point</span></h2>
+                <p>(<span th:text="${point.latitude}">Latitude</span>, <span th:text="${point.longitude}">Longitude</span>)</p>
                 <ul>
                     <li th:each="observation : ${point.observations}">
                         <span th:text="${observation.time}">Time</span>
@@ -28,14 +28,14 @@
                     </li>   
                 </ul>  
             </div>
-            <div>
+            <div> 
                 <form method="POST" action="/" enctype="multipart/form-data">
-                    <input type="text" name="temperature" placeholder="Temperature" required/><br/>
+                    <input input type="number" step="any" min="-100" max="70" name="temperature" placeholder="Temperature" required/><br/>
                     <input type="datetime-local" name="time" required/><br/>
                     <select name="pointId">
                         <option th:each="point : ${points}"
-                            th:value="${point.id}"
-                            th:utext="${point.name}"/>
+                                th:value="${point.id}"
+                                th:utext="${point.name}"/>
                     </select><br/>
                     <input type="submit" value="Send!"/>
                 </form>
