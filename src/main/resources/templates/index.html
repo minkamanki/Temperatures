@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-        <head>
-            <title>Weather observations</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        </head>
+            <head>
+                <title>Weather observations</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            </head>
+
     <body>
-
         <div class="container">
-
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link" href="/">Homepage</a></li>
-                <li  class="nav-item" th:each="point :${points}">
+                <li class="nav-item" th:each="point :${points}">
                     <a class="nav-link" th:href="@{/{pointId}(pointId=${point.id})}">
                         <span th:text="${point.name}">Weather point</span></a>
                 </li>
             </ul>
+
+            <div th:if="${not #lists.isEmpty(observations)}">
+                <h2>Latest observations:</h2>
+                <ul>
+                    <li th:each="observation : ${observations}">
+                        <p><span th:text="${#temporals.format(observation.time, 'dd-MM-yyyy HH:mm')}">Time</span> <br>
+                                <span th:text="${observation.point.name}">Name</span>: 
+                                <span th:text="${observation.temperature}">Temperature</span>°C 
+
+                        </p>
+                    </li>   
+                </ul>  
+            </div>
 
             <div th:if="${not #lists.isEmpty(point)}">
                 <h2><span th:text="${point.name}">Point</span></h2>
                 <p>(<span th:text="${point.latitude}">Latitude</span>, <span th:text="${point.longitude}">Longitude</span>)</p>
                 <ul>
                     <li th:each="observation : ${point.observations}">
-                        <span th:text="${observation.time}">Time</span>
-                        <p><span th:text="${observation.temperature}">Temperature</span>°C</p>                        
+                        <p><span th:text="${#temporals.format(observation.time, 'dd-MM-yyyy HH:mm')}">Time</span><br>
+                                <font size="6"><span th:text="${observation.temperature}">Temperature</span>°C</font>
+                        </p>                        
                     </li>   
                 </ul>  
             </div>
+
             <div> 
                 <form method="POST" action="/" enctype="multipart/form-data">
                     <input input type="number" step="any" min="-100" max="70" name="temperature" placeholder="Temperature" required/><br/>
@@ -41,6 +55,7 @@
                 </form>
             </div>
         </div>
+
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

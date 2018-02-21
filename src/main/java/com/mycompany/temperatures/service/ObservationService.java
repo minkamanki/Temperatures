@@ -35,5 +35,9 @@ public class ObservationService {
         observationRepository.save(observation);
     }
 
+    public List<Observation> list() {        
+        return observationRepository.findAll();
+    }
+
 
 }

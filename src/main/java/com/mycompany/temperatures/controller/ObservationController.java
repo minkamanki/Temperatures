@@ -42,7 +42,7 @@ public class ObservationController {
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
         model.addAttribute("points", pointService.list());
-//        model.addAttribute("observations", observationService.list()); //list lateset observation for all points
+        model.addAttribute("observations", observationService.list());
         return "index";
     }
 
