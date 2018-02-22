@@ -7,4 +7,4 @@
 
 [Reaktor summer job](https://github.com/reaktor/kesa-2018)
 
-This is very simple solution. Works at least whit Chrome browser.
+This is very simple solution. Should works whit Chrome browser.
